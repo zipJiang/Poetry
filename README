@@ -31,14 +31,14 @@ Any sentence that cannot be successfully translated by the compiler os considere
 1.3 <useful>
 The part tagged <useful> is all the valid commands the compiler might recognize. Currently it includes the following functions:
 
-	<useful> -> (<if_stat> | <while_stat> | <for_stat> | <eval> | <def>) \n
+	<useful> -> [<useless>] (<if_stat> | <while_stat> | <for_stat> | <eval> | <def>) [<useless>] \n
 
 We will look at those statments one by one.
 
 1.4.1 <if_stat>
 The <if_stat> functions basically like those in the C family languages, with the difference that it can have many possible form as it is contrived to be in compliance with natural literary languages.
 
-	<if_stat> -> | (if | If | IF) <eval> (, | \n) {<stmt>}
+	<if_stat> -> (if | If | IF) <eval> (, | \n) {<stmt>}
 		     [{<useless>} (else, Else, ELSE, or, Or, OR, rather\,, Rather\,, RATHER\,)
 		     {<useless>} {<stmt>}]
 		     (end | End | END | cease | Cease | CEASE)[<mark>] {<useless>}
