@@ -77,10 +77,10 @@ The expression under <eval> tag all have return values. Notice that though the r
 	<num> -> [without] <nb>
 
 	<nb> -> (one | two | three | four | five | six | seven | eight
-		  | nine | ten)
-		  | (eleven | twelve | thirteen | fourteen | fifteen
-		  | sixteen | seventeen | eighteen | nineteen)
-		  | (twenty | thirty | fourty | fifty | sixty | seventy | eighty | ninety) - 
-		  (one | two | three | four | five | six | seven | eight
-		  | nine | ten)
-		  | hundred | thousand | million | billion
+		| nine | ten)
+		| (eleven | twelve | thirteen | fourteen | fifteen
+		| sixteen | seventeen | eighteen | nineteen)
+		| (twenty | thirty | fourty | fifty | sixty | seventy | eighty | ninety) - 
+		(one | two | three | four | five | six | seven | eight
+		| nine | ten)
+		| hundred | thousand | million | billion
