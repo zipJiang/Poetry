@@ -46,6 +46,6 @@ The <if_stat> functions basically like those in the C family languages, with the
 	<stmt> -> <mchd> | <umad>
 
 	<mchd> -> (if | If | IF)[<mark>] <eval> (, | \n) {<mchd>}
-		  {<word>\s} (else, Else, ELSE, or, Or, OR, rather\,, Rather\s,, RATHER\,)
+		  [<useless>] (else, Else, ELSE, or, Or, OR, rather\,, Rather\s,, RATHER\,)
 		  {\s, <word>} {<mchd>}
 		  (end | END | END)[<mark>]
