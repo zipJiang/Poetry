@@ -19,7 +19,7 @@ The definition of tag <word> is like this:
 	
 	<mark> -> (", ', ., ;, -, \,, ?, !)
 
-Here at the very beginning of this introduction file, I might reiterate the most unusual feature of PPL as a programming language, it is completely CASE INSENSITIVE. And yes, completely.
+Here at the very beginning of this introduction file, I might reiterate the most unusual feature of PPL as a programming language, it is completely CASE INSENSITIVE. But there is one exceptional cases, that if a word is completely capitalized, it can be intentionally treated as a <useless> word.
 
 1.2 <expr>
 The definition of tag <expr> is very simple. Since we should make the lines as much readable as useful, as little as much restrictions on it should be made.
@@ -68,4 +68,19 @@ The <if_stat> functions basically like those in the C family languages, with the
 /**********To be implemented**********/
 
 1.4.3 <eval>
-The Poetry Programming Language has only integer calculation, as I thought it would never bother people who read poetry to be a little imprecise. And also, the programming language has two built-in token(identifier), that is, "true" and "false". As calculation in PPL has only one type, every integer doesn't equal to 0 will be evaluated to "true" and "true", in a calculation if it is used, will have the same value as one. Then you can guess, based on the similarity of how this is similar to the C family languages, what the function of "false" will be like.
+The expression under <eval> tag all have return values. Notice that though the result might be used in the <if_stat> or in a loop as the normaly do in C family languages, the real difference was that PPL currently has only one data type called int.
+
+	<eval> -> <mevl> [<useless>] and [<useless>] <eval>
+
+	<mevl> -> <num> [<useless>] <mevl>
+
+	<num> -> [without] <nb>
+
+	<nb> -> (one | two | three | four | five | six | seven | eight
+		  | nine | ten)
+		  | (eleven | twelve | thirteen | fourteen | fifteen
+		  | sixteen | seventeen | eighteen | nineteen)
+		  | (twenty | thirty | fourty | fifty | sixty | seventy | eighty | ninety) - 
+		  (one | two | three | four | five | six | seven | eight
+		  | nine | ten)
+		  | hundred | thousand | million | billion
