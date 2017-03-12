@@ -9,7 +9,9 @@ A <word> is a string of juxtaposed characters seperated by string. There are use
 	" ' , . ; : - ? !
 There are no particular reason for the relative small character set, a possible interpretation here could be given is that those are the most commonly encountered characters in English Poetry, those confined our users to this realative small characterset can result to a better resemblance to what, by common agreement is called "poetry".
 The definition of tag <word> is like this:
+
 	<word> -> <char>{<char>}
+	
 	<char> -> ( A | B | C | D | E | F | G | H | I | J | K | L | M | N
 		  | O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b
 		  | c | d | e | f | g | h | i | j | k | l | m | n | o | p
@@ -18,17 +20,23 @@ The definition of tag <word> is like this:
 
 1.2 <expr>
 The definition of tag <expr> is very simple. Since we should make the lines as much readable as useful, as little as much restrictions on it should be made.
+
 	<bloc> -> {<expr>}
+
 	<expr> -> <useless> | <useful>
+
 Any sentence that cannot be successfully translated by the compiler os considered <useless>. This actually considerable aggrandized the expressiveness of the Poetry Programming Language. As we'll come across later in the introduction part, the only restriction putting on the <useless> is that it should be ended with a NEWLINE character.
 
 1.3 <useful>
 The part tagged <useful> is all the valid commands the compiler might recognize. Currently it includes the following functions:
+
 	<useful> -> <if_stat> | <while_stat> | <for_stat> | <eval> | <def>
+
 We will look at those statments one by one.
 
 1.4.1 <if_stat>
 The <if_stat> functions basically like those in the C family languages, with the difference that it can have many possible form as it is contrived to be in compliance with natural literary languages.
+
 	<if_stat> -> [<word>\s] <if_stat> [\s<word>]
 		 | (if | If | IF) <eval> {(\s | <word>)} (, | \n) {<bloc>}
 		 [{<word>\s} (else, Else, ELSE, or, Or, OR, rather\,, Rather\,, RATHER\,)
