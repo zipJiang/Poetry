@@ -17,20 +17,22 @@ The definition of tag <word> is like this:
 		  | c | d | e | f | g | h | i | j | k | l | m | n | o | p
 		  | q | r | s | t | u | v | w | x | y | z | " | ' | , | .
 		  | ; | : | - | ? | ! )
+	
+	<mark> -> (", ', ., ;, -, \,, ?, !)
 
 1.2 <expr>
 The definition of tag <expr> is very simple. Since we should make the lines as much readable as useful, as little as much restrictions on it should be made.
 
 	<bloc> -> {<expr>}
 
-	<expr> -> <useless> | <useful>
+	<expr> -> (<useless> \n) | <useful>
 
-Any sentence that cannot be successfully translated by the compiler os considered <useless>. This actually considerable aggrandized the expressiveness of the Poetry Programming Language. As we'll come across later in the introduction part, the only restriction putting on the <useless> is that it should be ended with a NEWLINE character.
+Any sentence that cannot be successfully translated by the compiler os considered <useless>. This actually considerable aggrandized the expressiveness of the Poetry Programming Language. As we'll come across later in the introduction part, the only restriction putting on the <useless> is that it should be a sentence that conveys no meaning.
 
 1.3 <useful>
 The part tagged <useful> is all the valid commands the compiler might recognize. Currently it includes the following functions:
 
-	<useful> -> <if_stat> | <while_stat> | <for_stat> | <eval> | <def>
+	<useful> -> (<if_stat> | <while_stat> | <for_stat> | <eval> | <def>) \n
 
 We will look at those statments one by one.
 
@@ -39,11 +41,13 @@ The <if_stat> functions basically like those in the C family languages, with the
 
 	<if_stat> -> [<word>\s] <if_stat> [\s<word>]
 			| (if | If | IF) <eval> (, | \n) {<stmt>}
-			[{<word>\s} (else, Else, ELSE, or, Or, OR, rather\,, Rather\,, RATHER\,)
-			{\s<word>} {<stmt>}]
-			(end | End | END)
+			[{<useless>} (else, Else, ELSE, or, Or, OR, rather\,, Rather\,, RATHER\,)
+			{<useless>} {<stmt>}]
+			(end | End | END | cease | Cease | CEASE)[<mark>] {<useless>}
 
 	<stmt> -> <mchd> | <umad>
 
-	<mchd> -> (if | If | IF) <eval> (, | \n) {<stmt>}
-		[]
+	<mchd> -> (if | If | IF)[<mark>] <eval> (, | \n) {<mchd>}
+			{<word>\s} (else, Else, ELSE, or, Or, OR, rather\,, Rather\s,, RATHER\,)
+			{\s, <word>} {<mchd>}
+			(end | END | END)[<mark>] {<useless>}
