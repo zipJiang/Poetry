@@ -11,10 +11,10 @@ There are no particular reason for the relative small character set, a possible 
 The definition of tag <word> is like this:
 	<word> -> <char>{<char>}
 	<char> -> ( A | B | C | D | E | F | G | H | I | J | K | L | M | N
-			| O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b
-			| c | d | e | f | g | h | i | j | k | l | m | n | o | p
-			| q | r | s | t | u | v | w | x | y | z | " | ' | , | .
-			| ; | : | - | ? | ! )
+		| O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b
+		| c | d | e | f | g | h | i | j | k | l | m | n | o | p
+		| q | r | s | t | u | v | w | x | y | z | " | ' | , | .
+		| ; | : | - | ? | ! )
 
 1.2 <expr>
 The definition of tag <expr> is very simple. Since we should make the lines as much readable as useful, as little as much restrictions on it should be made.
