@@ -72,7 +72,9 @@ The expression under <eval> tag all have return values. Notice that though the r
 
 	<eval> -> <mevl> [<useless>] and [<useless>] <eval>
 
-	<mevl> -> <num> [<useless>] <mevl>
+	<mevl> -> <divs> [<useless>] <mevl>
+
+	<divs> -> <divs> [<useless>] by [<useless>] <num>
 
 	<num> -> [without] <nb>
 
