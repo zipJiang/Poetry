@@ -60,3 +60,12 @@ The <if_stat> functions basically like those in the C family languages, with the
 		  [<useless>] (else | or | rather\,)
 		  [<useless>] {<umad>}
 		  (end | cease)[<mark>]
+
+1.4.2 <while_stat>
+/**********To be implemented**********/
+
+1.4.3 <for_stat>
+/**********To be implemented**********/
+
+1.4.3 <eval>
+The Poetry Programming Language has only integer calculation, as I thought it would never bother people who read poetry to be a little imprecise. And also, the programming language has two built-in token(identifier), that is, "true" and "false". As calculation in PPL has only one type, every integer doesn't equal to 0 will be evaluated to "true" and "true", in a calculation if it is used, will have the same value as one. Then you can guess, based on the similarity of how this is similar to the C family languages, what the function of "false" will be like.
