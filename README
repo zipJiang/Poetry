@@ -10,7 +10,7 @@ A <word> is a string of juxtaposed characters seperated by string. There are use
 There are no particular reason for the relative small character set, a possible interpretation here could be given is that those are the most commonly encountered characters in English Poetry, those confined our users to this realative small characterset can result to a better resemblance to what, by common agreement is called "poetry".
 The definition of tag <word> is like this:
 
-	<word> -> <char>{<char>}
+	<word> -> (<char>{<char>})[<word>]
 	
 	<char> -> ( A | B | C | D | E | F | G | H | I | J | K | L | M | N
 		  | O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b
