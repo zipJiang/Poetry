@@ -72,9 +72,9 @@ The expression under <eval> tag all have return values. Notice that though the r
 
 	<eval> -> <mevl> [<useless>] and [<useless>] <eval>
 
-	<mevl> -> <divs> [<useless>] <mevl>
+	<mevl> -> (<divs> [<useless>] <mevl>) | <divs>
 
-	<divs> -> <divs> [<useless>] by [<useless>] <num>
+	<divs> -> (<divs> [<useless>] by [<useless>] <num>) | <num>
 
 	<num> -> [without] <nb>
 
@@ -86,3 +86,7 @@ The expression under <eval> tag all have return values. Notice that though the r
 		(one | two | three | four | five | six | seven | eight
 		| nine | ten)
 		| hundred | thousand | million | billion
+
+Currently PPL doesn't support paranthesis. And noticing that the <divs> defined able is ineluctably left recursive, we might slightly ater its definition by redefining it as:
+	<divs> -> nondivision-calculation [<useless>] <divn>
+	<divn> -> by [<useless>] nondivision-calculation [<useless>] <divn>
