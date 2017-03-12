@@ -18,9 +18,17 @@ The definition of tag <word> is like this:
 
 1.2 <expr>
 The definition of tag <expr> is very simple. Since we should make the lines as much readable as useful, as little as much restrictions on it should be made.
+	<bloc> -> {<expr>}
 	<expr> -> <useless> | <useful>
 Any sentence that cannot be successfully translated by the compiler os considered <useless>. This actually considerable aggrandized the expressiveness of the Poetry Programming Language. As we'll come across later in the introduction part, the only restriction putting on the <useless> is that it should be ended with a NEWLINE character.
 
 1.3 <useful>
 The part tagged <useful> is all the valid commands the compiler might recognize. Currently it includes the following functions:
-	<useful> -> <if_stat> | <while_stat> | <for_stat> | <calc> | <def>
+	<useful> -> <if_stat> | <while_stat> | <for_stat> | <eval> | <def>
+We will look at those statments one by one.
+
+1.4.1 <if_stat>
+The <if_stat> functions basically like those in the C family languages, with the difference that it can have many possible form as it is contrived to be in compliance with natural literary languages.
+	<if_stat> -> [<word>] <if_stat> [<word>]
+		 | (if | If | IF) <eval> {(\s | <word>)} (, | \n) {<bloc>} (end | End | END)
+		 | 
