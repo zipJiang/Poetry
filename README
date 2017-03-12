@@ -38,8 +38,7 @@ We will look at those statments one by one.
 1.4.1 <if_stat>
 The <if_stat> functions basically like those in the C family languages, with the difference that it can have many possible form as it is contrived to be in compliance with natural literary languages.
 
-	<if_stat> -> [<word>\s] <if_stat> [\s<word>]
-		     | (if | If | IF) <eval> (, | \n) {<stmt>}
+	<if_stat> -> | (if | If | IF) <eval> (, | \n) {<stmt>}
 		     [{<useless>} (else, Else, ELSE, or, Or, OR, rather\,, Rather\,, RATHER\,)
 		     {<useless>} {<stmt>}]
 		     (end | End | END | cease | Cease | CEASE)[<mark>] {<useless>}
