@@ -31,7 +31,9 @@ Any sentence that cannot be successfully translated by the compiler os considere
 1.3 <useful>
 The part tagged <useful> is all the valid commands the compiler might recognize. Currently it includes the following functions:
 
-	<useful> -> [<useless>] (<if_stat> | <while_stat> | <for_stat> | <eval> | <def>) [<useless>] \n
+	<useful> -> [<useless>]
+		  (<if_stat> | <while_stat> | <for_stat> | <eval> | <def>)
+		  [<useless>] \n
 
 We will look at those statments one by one.
 
