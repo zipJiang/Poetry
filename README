@@ -15,3 +15,8 @@ The definition of tag <word> is like this:
 			  | c | d | e | f | g | h | i | j | k | l | m | n | o | p
 			  | q | r | s | t | u | v | w | x | y | z | " | ' | , | .
 			  | ; | : | - | ? | ! )
+
+1.2 <expr>
+The definition of tag <expr> is very simple. Since we should make the lines as much readable as useful, as little as much restrictions on it should be made.
+	<expr> -> <useless> | <useful>
+Any sentence that cannot be successfully translated by the compiler os considered <useless>. This actually considerable aggrandized the expressiveness of the Poetry Programming Language. As we'll come across later in the introduction part, the only restriction putting on the <useless> is that it should be ended with a NEWLINE character.
