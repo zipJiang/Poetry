@@ -4,7 +4,7 @@
 
 The Poetry Programming Language is a tiny language trying to pander to the usually pragmatic programmers' sporadic zealotry for profoundness and sentimentality. Though till now this language provides nothing but a few basic operations to finish pedagogic tasks therefore unable to be utilized to facilitate practical problems, to its author however, writting programmes with the language of literature (that is, the language of ultimate beauty) will never be considered a despicable or even futile trial. Below is a short but comprehensive description of the language characteristics in Backus Naur Form.
 
-1.1 <word>
+1.1 <word>,
 A <word> is a string of juxtaposed characters seperated by string. There are useful words and useless words, all the characters allowed are those in the alphabet and special punctuations including:
 	" ' , . ; : - ? !
 There are no particular reason for the relative small character set, a possible interpretation here could be given is that those are the most commonly encountered characters in English Poetry, those confined our users to this realative small characterset can result to a better resemblance to what, by common agreement is called "poetry".
@@ -18,6 +18,8 @@ The definition of tag <word> is like this:
 		  | q | r | s | t | u | v | w | x | y | z )
 	
 	<mark> -> (", ', ., ;, -, \,, ?, !)
+
+Here at the very beginning of this introduction file, I might reiterate the most unusual feature of PPL as a programming language, it is completely CASE INSENSITIVE. And yes, completely.
 
 1.2 <expr>
 The definition of tag <expr> is very simple. Since we should make the lines as much readable as useful, as little as much restrictions on it should be made.
@@ -40,15 +42,21 @@ We will look at those statments one by one.
 1.4.1 <if_stat>
 The <if_stat> functions basically like those in the C family languages, with the difference that it can have many possible form as it is contrived to be in compliance with natural literary languages.
 
-	<if_stat> -> (if | If | IF) <eval> (, | \n) {<stmt>}
-		     [[<useless>] (else, Else, ELSE, or, Or, OR, rather\,, Rather\,, RATHER\,)
+	<if_stat> -> if [<mark>] <eval> (, | \n) {<stmt>}
+		     [[<useless>] (else | or | rather\,)
 		     [<useless>] {<stmt>}]
-		     (end | End | END | cease | Cease | CEASE)[<mark>]
+		     (end | cease)[<mark>]
 
 	<stmt> -> <mchd> | <umad>
 
-	<mchd> -> (if | If | IF)[<mark>] <eval> (, | \n) {<mchd>}
-		  [<useless>] (else, Else, ELSE, or, Or, OR, rather\,, Rather\s,, RATHER\,)
-		  {\s, <word>} {<mchd>}
-		  (end | END | END)[<mark>]
+	<mchd> -> if [<mark>] <eval> (, | \n) {<mchd>}
+		  [<useless>] (else | or | rather\,)
+		  [<useless>] {<mchd>}
+		  (end | cease)[<mark>]
 		  | non-if-statements
+
+	<umad> -> if [<mark>] <eval> (, | \n) {<stmt>}
+		  | if [<mark>] <eval> (, | \n) {<mchd>}
+		  [<useless>] (else | or | rather\,)
+		  [<useless>] {<umad>}
+		  (end | cease)[<mark>]
