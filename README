@@ -51,3 +51,4 @@ The <if_stat> functions basically like those in the C family languages, with the
 		  [<useless>] (else, Else, ELSE, or, Or, OR, rather\,, Rather\s,, RATHER\,)
 		  {\s, <word>} {<mchd>}
 		  (end | END | END)[<mark>]
+		  | non-if-statements
