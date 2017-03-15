@@ -1,17 +1,29 @@
 #include "poetry.h"
 
 using namespace std;
+std::map<std::string, int> numbers;
+std::set<std::string> builtin;
+std::ifstream is;
+std::string nextLexeme;
+int nextToken;
 
 int lex() {
+	if(is.eof())
+		return nextToken = EMPTY;
+	cout << nextLexeme << endl;
 	ostringstream os;
 	char current;
-
-	while(is >> current) {
-		while(current == ' ' || current == '\t')
-			is >> current;
+	while(is.good()) {
+		is.get(current);
+		while((current == ' ' || current == '\t' || current == '\n')
+				&& is.good())
+			is.get(current);
 
 		if((current >= 'a' && current <= 'z') || (current >= 'A' && current <= 'Z')) {
 			/* current chat is in the alphabet */
+			/*
+			 *cout << "current = " << current << " written" << endl;
+			 */
 			os<<current;
 		}
 		else if(current == '?' || current == '.' || current == ':' ||
@@ -22,22 +34,26 @@ int lex() {
 			return nextToken = MARK;
 		}
 		current = is.peek();
+		/*
+		 *cout << (int)current << endl;
+		 */
 		if(current == '?' || current == '.' || current == ':' ||
 		   current == '!' || current == ',' || current == ';' ||
-		   current == ' ' || current == '\t'|| current == '-') {
+		   current == ' ' || current == '\t'|| current == '-' ||
+		   current == '\n') {
 			break;
 		}
 	}
 	/* Preprocess to avoid uppercase */
 	nextLexeme = os.str();
-	bool specialized = false;
+	bool specialized = true;
 	for(int i = 0; i != nextLexeme.size(); ++i) {
 		if(nextLexeme[i] >= 'a' && nextLexeme[i] <= 'z') {
-			specialized = true;
+			specialized = false;
 			break;
 		}
 	}
-	if(!specialized) {
+	if(specialized) {
 		return nextToken = USELESS_WORD;
 	}
 	else {
@@ -54,12 +70,22 @@ int lex() {
 	if(builtin.find(os.str()) != builtin.end()) {
 		return nextToken = RESERVED;
 	}
-
 	return nextToken = USELESS_WORD;
 }
 
-int syntax(ifstream &is) {
-	;
+int syntax() {
+	/* Note: this is only for trial */
+	lex();
+	if(nextToken & (USELESS_WORD | MARK))
+		useless_parser();
+
+	if(nextToken == EOF)
+		return 0;
+
+	eval_parser();
+	if(nextToken & (USELESS_WORD | MARK))
+		useless_parser();
+	/* End Trail */
 	return 0;
 }
 
@@ -116,8 +142,7 @@ int main( int args, char **argv ) {
 		cout << "filetype matching failed, this is not a poetry file." << endl;
 		exit(0);
 	}
-	ifstream ifs(argv[1], ios::in);
-
-	syntax(ifs);
+	is.open(argv[1], ios::in);
+	syntax();
 	return 0;
 }

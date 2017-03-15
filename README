@@ -42,20 +42,20 @@ We will look at those statments one by one.
 1.4.1 <if_stat>
 The <if_stat> functions basically like those in the C family languages, with the difference that it can have many possible form as it is contrived to be in compliance with natural literary languages.
 
-	<if_stat> -> if [<mark>] <eval> ; {<stmt>}
+	<if_stat> -> if [<mark>] <eval> (<useless> | <mark>) {<stmt>}
 		     [[<useless>] (else | or | rather)
 		     [<useless>] {<stmt>}]
 		     (end | cease)[<mark>]
 
 	<stmt> -> <mchd> | <umad>
 
-	<mchd> -> if [<mark>] <eval> ; {<mchd>}
+	<mchd> -> if [<mark>] <eval> (<useless> | <mark>) {<mchd>}
 		  [<useless>] (else | or | rather)
 		  [<useless>] {<mchd>}
 		  (end | cease)[<mark>]
 		  | non-if-statements
 
-	<umad> -> if [<mark>] <eval> ; {<stmt>}
+	<umad> -> if [<mark>] <eval> (<useless> | <mark>) {<stmt>}
 		  | if [<mark>] <eval> ; {<mchd>}
 		  [<useless>] (else | or | rather)
 		  [<useless>] {<umad>}

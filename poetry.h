@@ -8,15 +8,16 @@
 
 #ifndef _POETRY_
 #define _POETRY_
-#define USELESS_WORD 0
-#define RESERVED 1
-#define MARK 2
-#define NUMBER 4
-std::map<std::string, int> numbers;
-std::set<std::string> builtin;
-std::ifstream is;
-std::string nextLexeme;
-int nextToken = -1;
+#define EMPTY 0
+#define USELESS_WORD 1
+#define RESERVED 2
+#define MARK 4
+#define NUMBER 8
+extern std::map<std::string, int> numbers;
+extern std::set<std::string> builtin;
+extern std::ifstream is;
+extern std::string nextLexeme;
+extern int nextToken;
 #endif
 
 int lex();
@@ -25,3 +26,5 @@ void mevl_parser();
 void divs_parser();
 void num_parser();
 void nb_parser();
+
+void useless_parser();
