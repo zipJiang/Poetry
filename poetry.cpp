@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <set>
 #include <fstream>
 #include <sstream>
 #include <regex>
@@ -13,6 +14,8 @@
 using namespace std;
 
 map<string, int> numbers;
+
+set<string> builtin;
 
 string lexeme;
 
@@ -65,6 +68,9 @@ int lex(string literal) {
 	if(numbers.find(os.str()) != numbers.end()) {
 		return NUMBER;
 	}
+	if(builtin.find(os.str()) != builtin.end()) {
+		return RESERVED;
+	}
 
 	return USELESS_WORD;
 }
@@ -107,6 +113,14 @@ int main( int args, char **argv ) {
 	numbers["hundred"] = 100;
 	numbers["thousand"] = 1000;
 	numbers["million"] = 1000000;
+
+	/* Initialize builtin identifier */
+	builtin.insert("if");
+	builtin.insert("else");
+	builtin.insert("rather");
+	builtin.insert("or");
+	builtin.insert("end");
+	builtin.insert("cease");
 
 	/* Initialize input file */
 
