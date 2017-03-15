@@ -64,7 +64,7 @@ void divs_parser() {
 	if(nextLexeme != "by") {
 		std::cout << "parsing failed, expected \" by \" lexeme." << std::endl;
 
-		/* Probably we need to correct this error. */
+		/* Probably we need to fix this.*/
 	}
 	lex();
 
@@ -82,7 +82,8 @@ void divs_parser() {
 
 		/* Probably we need to correct this error. */
 	}
-	lex();
+	else
+		lex();
 	std::cout << "finished <divs>" << std::endl;
 }
 
@@ -104,16 +105,18 @@ void nb_parser() {
 	std::cout << "parsing <nb>" << std::endl;
 	if(nextToken != NUMBER) {
 		std::cout << "parsing failed, expected a NUMBER token." << std::endl;
-		/* Probably we need to correct this error. */
+		/* Probably we need to fix this. */
 	}
-	lex();
+	else
+		lex();
 	if(nextLexeme == "-") {
 		lex();
 		if(nextToken != NUMBER) {
 			std::cout << "parsing failed, expected a NUMBER after \'-\'" << std::endl;
-			/* Probably we need to correct this error. */
+			/* Probably we need to fix this. */
 		}
-		lex();
+		else
+			lex();
 	}
 	std::cout << "finished <nb>" << std::endl;
 }

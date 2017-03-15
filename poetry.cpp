@@ -133,6 +133,7 @@ int main( int args, char **argv ) {
 	builtin.insert("then");
 	builtin.insert("divide");
 	builtin.insert("without");
+	builtin.insert("by");
 
 	/* Initialize input file */
 
