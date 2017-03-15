@@ -25,7 +25,7 @@ int lex(string literal) {
 	int token = -1;
 	char current;
 	/* First we have to eliminate whitespace before the lexeme */
-	while(is.peek() == ' ')
+	while(is.peek() == ' ' || is.peek() == '\t')
 		is >> current;
 
 	while(is >> current) {
