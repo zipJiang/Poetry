@@ -24,11 +24,11 @@ int lex(string literal) {
 	ostringstream os;
 	int token = -1;
 	char current;
+	/* First we have to eliminate whitespace before the lexeme */
+	while(is.peek() == ' ')
+		is >> current;
+
 	while(is >> current) {
-		if(current == ' ') {
-			lexeme = " ";
-			return USELESS_WORD;
-		}
 		if((current >= 'a' && current <= 'z') || (current >= 'A' && current <= 'Z') || current == '-') {
 			/* current chat is in the alphabet */
 			os<<current;
