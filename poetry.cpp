@@ -1,34 +1,15 @@
-#include <iostream>
-#include <string>
-#include <map>
-#include <set>
-#include <fstream>
-#include <sstream>
-#include <regex>
-
-#define USELESS_WORD 0
-#define RESERVED 1
-#define MARK 2
-#define NUMBER 4
+#include "poetry.h"
 
 using namespace std;
 
-map<string, int> numbers;
-
-set<string> builtin;
-
-string lexeme;
-
-int lex(string literal) {
-	istringstream is(literal);
+int lex() {
 	ostringstream os;
-	int token = -1;
 	char current;
-	/* First we have to eliminate whitespace before the lexeme */
-	while(is.peek() == ' ' || is.peek() == '\t')
-		is >> current;
 
 	while(is >> current) {
+		while(current == ' ' || current == '\t')
+			is >> current;
+
 		if((current >= 'a' && current <= 'z') || (current >= 'A' && current <= 'Z') || current == '-') {
 			/* current chat is in the alphabet */
 			os<<current;
@@ -36,43 +17,44 @@ int lex(string literal) {
 		else if(current == '?' || current == '.' || current == ':' ||
 				current == '!' || current == ',' || current == ';') {
 			os<<current;
-			lexeme = os.str();
-			return MARK;
+			nextLexeme = os.str();
+			return nextToken = MARK;
 		}
 		current = is.peek();
 		if(current == '?' || current == '.' || current == ':' ||
-		   current == '!' || current == ',' || current == ';') {
+		   current == '!' || current == ',' || current == ';' ||
+		   current == ' ' || current == '\t') {
 			break;
 		}
 	}
 	/* Preprocess to avoid uppercase */
-	lexeme = os.str();
+	nextLexeme = os.str();
 	bool specialized = false;
-	for(int i = 0; i != lexeme.size(); ++i) {
-		if(lexeme[i] >= 'a' && lexeme[i] <= 'z') {
+	for(int i = 0; i != nextLexeme.size(); ++i) {
+		if(nextLexeme[i] >= 'a' && nextLexeme[i] <= 'z') {
 			specialized = true;
 			break;
 		}
 	}
 	if(!specialized) {
-		return USELESS_WORD;
+		return nextToken = USELESS_WORD;
 	}
 	else {
-		for(int i = 0; i != lexeme.size(); ++i) {
-			if(lexeme[i] >= 'A' && lexeme[i] <= 'Z') {
-				lexeme[i] += 'a' - 'A';
+		for(int i = 0; i != nextLexeme.size(); ++i) {
+			if(nextLexeme[i] >= 'A' && nextLexeme[i] <= 'Z') {
+				nextLexeme[i] += 'a' - 'A';
 			}
 		}
 	}
 	/* Determine the category of this word */
 	if(numbers.find(os.str()) != numbers.end()) {
-		return NUMBER;
+		return nextToken = NUMBER;
 	}
 	if(builtin.find(os.str()) != builtin.end()) {
-		return RESERVED;
+		return nextToken = RESERVED;
 	}
 
-	return USELESS_WORD;
+	return nextToken = USELESS_WORD;
 }
 
 int syntax(ifstream &is) {
@@ -121,6 +103,8 @@ int main( int args, char **argv ) {
 	builtin.insert("or");
 	builtin.insert("end");
 	builtin.insert("cease");
+	builtin.insert("then");
+	builtin.insert("divide");
 
 	/* Initialize input file */
 

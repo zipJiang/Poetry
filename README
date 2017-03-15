@@ -42,21 +42,21 @@ We will look at those statments one by one.
 1.4.1 <if_stat>
 The <if_stat> functions basically like those in the C family languages, with the difference that it can have many possible form as it is contrived to be in compliance with natural literary languages.
 
-	<if_stat> -> if [<mark>] <eval> (, | \n) {<stmt>}
+	<if_stat> -> if [<mark>] <eval> ; {<stmt>}
 		     [[<useless>] (else | or | rather)
 		     [<useless>] {<stmt>}]
 		     (end | cease)[<mark>]
 
 	<stmt> -> <mchd> | <umad>
 
-	<mchd> -> if [<mark>] <eval> (, | \n) {<mchd>}
+	<mchd> -> if [<mark>] <eval> ; {<mchd>}
 		  [<useless>] (else | or | rather)
 		  [<useless>] {<mchd>}
 		  (end | cease)[<mark>]
 		  | non-if-statements
 
-	<umad> -> if [<mark>] <eval> (, | \n) {<stmt>}
-		  | if [<mark>] <eval> (, | \n) {<mchd>}
+	<umad> -> if [<mark>] <eval> ; {<stmt>}
+		  | if [<mark>] <eval> ; {<mchd>}
 		  [<useless>] (else | or | rather)
 		  [<useless>] {<umad>}
 		  (end | cease)[<mark>]
@@ -74,7 +74,7 @@ The expression under <eval> tag all have return values. Notice that though the r
 
 	<mevl> -> (<divs> [<useless>] <mevl>) | <divs>
 
-	<divs> -> (<divs> [<useless>] by [<useless>] <num>) | <num>
+	<divs> -> (divide <divs> [<useless>] by [<useless>] <num> then) | <num>
 
 	<num> -> [without] <nb>
 
@@ -86,11 +86,5 @@ The expression under <eval> tag all have return values. Notice that though the r
 		[one | two | three | four | five | six | seven | eight
 		| nine | ten]
 		| hundred | thousand | million
-
-Currently PPL doesn't support paranthesis. And noticing that the <divs> defined able is ineluctably left recursive, we might slightly ater its definition by redefining it as:
-
-	<divs> -> nondivision-calculation [<useless>] <divn>
-
-	<divn> -> by [<useless>] nondivision-calculation [<useless>] <divn>
 
 That's the end of the first part of the introduction to PPL.
