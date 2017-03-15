@@ -46,12 +46,14 @@ int main( int args, char **argv ) {
 
 	/* Initialize input file */
 
-	regex filetype("*\\.po");
+	regex filetype(".+\\.po");
 	cmatch m;
 	if(!regex_match(argv[1], m, filetype)) {
 		cout << "filetype matching failed, this is not a poetry file." << endl;
 		exit(0);
 	}
-	ifstream ifs(argv[1], ios::in);
+	/*
+	 *ifstream ifs(argv[1], ios::in);
+	 */
 	return 0;
 }
