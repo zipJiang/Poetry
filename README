@@ -17,7 +17,7 @@ The definition of tag <word> is like this:
 		  | c | d | e | f | g | h | i | j | k | l | m | n | o | p
 		  | q | r | s | t | u | v | w | x | y | z )
 	
-	<mark> -> (", ', ., ;, -, \,, ?, !)
+	<mark> -> (" | ' | . | ; | - | , | ? | !)
 
 Here at the very beginning of this introduction file, I might reiterate the most unusual feature of PPL as a programming language, it is completely CASE INSENSITIVE. But there is one exceptional cases, that if a word is completely capitalized, it can be intentionally treated as a <useless> word.
 
@@ -43,21 +43,21 @@ We will look at those statments one by one.
 The <if_stat> functions basically like those in the C family languages, with the difference that it can have many possible form as it is contrived to be in compliance with natural literary languages.
 
 	<if_stat> -> if [<mark>] <eval> (, | \n) {<stmt>}
-		     [[<useless>] (else | or | rather\,)
+		     [[<useless>] (else | or | rather)
 		     [<useless>] {<stmt>}]
 		     (end | cease)[<mark>]
 
 	<stmt> -> <mchd> | <umad>
 
 	<mchd> -> if [<mark>] <eval> (, | \n) {<mchd>}
-		  [<useless>] (else | or | rather\,)
+		  [<useless>] (else | or | rather)
 		  [<useless>] {<mchd>}
 		  (end | cease)[<mark>]
 		  | non-if-statements
 
 	<umad> -> if [<mark>] <eval> (, | \n) {<stmt>}
 		  | if [<mark>] <eval> (, | \n) {<mchd>}
-		  [<useless>] (else | or | rather\,)
+		  [<useless>] (else | or | rather)
 		  [<useless>] {<umad>}
 		  (end | cease)[<mark>]
 

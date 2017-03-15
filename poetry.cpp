@@ -2,15 +2,79 @@
 #include <string>
 #include <map>
 #include <fstream>
+#include <sstream>
 #include <regex>
+
+#define USELESS_WORD 0
+#define RESERVED 1
+#define MARK 2
+#define NUMBER 4
 
 using namespace std;
 
 map<string, int> numbers;
 
+string lexeme;
+
+int lex(string literal) {
+	istringstream is(literal);
+	ostringstream os;
+	int token = -1;
+	char current;
+	while(is >> current) {
+		if(current == ' ') {
+			lexeme = " ";
+			return USELESS_WORD;
+		}
+		if((current >= 'a' && current <= 'z') || (current >= 'A' && current <= 'Z') || current == '-') {
+			/* current chat is in the alphabet */
+			os<<current;
+		}
+		else if(current == '?' || current == '.' || current == ':' ||
+				current == '!' || current == ',' || current == ';') {
+			os<<current;
+			lexeme = os.str();
+			return MARK;
+		}
+		current = is.peek();
+		if(current == '?' || current == '.' || current == ':' ||
+		   current == '!' || current == ',' || current == ';') {
+			break;
+		}
+	}
+	/* Preprocess to avoid uppercase */
+	lexeme = os.str();
+	bool specialized = false;
+	for(int i = 0; i != lexeme.size(); ++i) {
+		if(lexeme[i] >= 'a' && lexeme[i] <= 'z') {
+			specialized = true;
+			break;
+		}
+	}
+	if(!specialized) {
+		return USELESS_WORD;
+	}
+	else {
+		for(int i = 0; i != lexeme.size(); ++i) {
+			if(lexeme[i] >= 'A' && lexeme[i] <= 'Z') {
+				lexeme[i] += 'a' - 'A';
+			}
+		}
+	}
+	/* Determine the category of this word */
+	if(numbers.find(os.str()) != numbers.end()) {
+		return NUMBER;
+	}
+
+	return USELESS_WORD;
+}
+
+int syntax(ifstream &is) {
+	;
+	return 0;
+}
 
 int main( int args, char **argv ) {
-
 	/* Initializing the numbers map */
 	numbers["one"] = 1;
 	numbers["zero"] = 0;
@@ -52,8 +116,8 @@ int main( int args, char **argv ) {
 		cout << "filetype matching failed, this is not a poetry file." << endl;
 		exit(0);
 	}
-	/*
-	 *ifstream ifs(argv[1], ios::in);
-	 */
+	ifstream ifs(argv[1], ios::in);
+
+	syntax(ifs);
 	return 0;
 }
