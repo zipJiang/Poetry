@@ -23,3 +23,5 @@ int lex();
 void eval_parser();
 void mevl_parser();
 void divs_parser();
+void num_parser();
+void nb_parser();

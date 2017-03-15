@@ -10,12 +10,13 @@ int lex() {
 		while(current == ' ' || current == '\t')
 			is >> current;
 
-		if((current >= 'a' && current <= 'z') || (current >= 'A' && current <= 'Z') || current == '-') {
+		if((current >= 'a' && current <= 'z') || (current >= 'A' && current <= 'Z')) {
 			/* current chat is in the alphabet */
 			os<<current;
 		}
 		else if(current == '?' || current == '.' || current == ':' ||
-				current == '!' || current == ',' || current == ';') {
+				current == '!' || current == ',' || current == ';' ||
+				current == '-') {
 			os<<current;
 			nextLexeme = os.str();
 			return nextToken = MARK;
@@ -23,7 +24,7 @@ int lex() {
 		current = is.peek();
 		if(current == '?' || current == '.' || current == ':' ||
 		   current == '!' || current == ',' || current == ';' ||
-		   current == ' ' || current == '\t') {
+		   current == ' ' || current == '\t'|| current == '-') {
 			break;
 		}
 	}
@@ -105,6 +106,7 @@ int main( int args, char **argv ) {
 	builtin.insert("cease");
 	builtin.insert("then");
 	builtin.insert("divide");
+	builtin.insert("without");
 
 	/* Initialize input file */
 
