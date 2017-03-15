@@ -78,15 +78,19 @@ The expression under <eval> tag all have return values. Notice that though the r
 
 	<num> -> [without] <nb>
 
-	<nb> -> (one | two | three | four | five | six | seven | eight
+	<nb> -> (zero | one | two | three | four | five | six | seven | eight
 		| nine | ten)
 		| (eleven | twelve | thirteen | fourteen | fifteen
 		| sixteen | seventeen | eighteen | nineteen)
 		| (twenty | thirty | fourty | fifty | sixty | seventy | eighty | ninety) - 
-		(one | two | three | four | five | six | seven | eight
-		| nine | ten)
-		| hundred | thousand | million | billion
+		[one | two | three | four | five | six | seven | eight
+		| nine | ten]
+		| hundred | thousand | million
 
 Currently PPL doesn't support paranthesis. And noticing that the <divs> defined able is ineluctably left recursive, we might slightly ater its definition by redefining it as:
+
 	<divs> -> nondivision-calculation [<useless>] <divn>
+
 	<divn> -> by [<useless>] nondivision-calculation [<useless>] <divn>
+
+That's the end of the first part of the introduction to PPL.
