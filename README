@@ -74,3 +74,17 @@ The expression under <eval> tag all have return values. Notice that though the r
 		| hundred | thousand | million
 
 That's the end of the first part of the introduction to PPL.
+
+2.Programming Basics
+
+Poetry is not designed for those arduous tasks in mundane life, rather, it is a kind of language purely for fun. The basic parsing rules of the front-end parser is that, it will try to resolve a sentence into workable codes first, and if it failed to do that, it will put it into a class called <useless> and continue parsing. That means one can put as much irrelevant lines in his or her program, without mixing up the final parsing result ( Yeah, and that why the programming language is called "POETRY"). in the same folder of the workable parser, there is a tiny trial script called "trial.po". If you take a look at the parserable codes, you may find that it looks very similar to a piece of poetic verse. Notice that the use of <useless> tag parcing can make closely related components highly scattered, thus conceal the real intention of the programmer. Following strictly the rules layed down above, you might create your own "versecode".
+
+3.Work with poetry
+
+3.1 MAC OS
+
+In the home directory of the project type make, and a simple parser called "poetry" will be built. If your code is written in file called "xxx.po", then type:
+
+		./poetry xxx.po
+
+Then the program will print the parsing result.
