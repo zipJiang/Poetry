@@ -42,11 +42,8 @@ void mevl_parser() {
 	 *    useless_parser();
 	 */
 
-	while(nextToken == NUMBER || nextLexeme == "without") {
-		/* <useless> */
-		if(nextToken & (USELESS_WORD | MARK)) {
-			useless_parser();
-		}
+	while(nextToken == NUMBER || nextLexeme == "without"
+		|| nextLexeme == "divide") {
 		
 		mevl_parser();
 	}
@@ -229,7 +226,8 @@ void stmt_parser() {
 		useless_parser();
 	}
 
-	else if(nextToken == NUMBER || nextLexeme == "without") {
+	else if(nextToken == NUMBER || nextLexeme == "without" ||
+			nextLexeme == "divide") {
 		eval_parser();
 	}
 
