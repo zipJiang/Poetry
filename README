@@ -4,7 +4,7 @@
 
 The Poetry Programming Language is a tiny language trying to pander to the usually pragmatic programmers' sporadic zealotry for profoundness and sentimentality. Though till now this language provides nothing but a few basic operations to finish pedagogic tasks therefore unable to be utilized to facilitate practical problems, to its author however, writting programmes with the language of literature (that is, the language of ultimate beauty) will never be considered a despicable or even futile trial. Below is a short but comprehensive description of the language characteristics in Backus Naur Form.
 
-1.1 <word>,
+1.1 <word>
 A <word> is a string of juxtaposed characters seperated by string. There are useful words and useless words, all the characters allowed are those in the alphabet and special punctuations including:
 	" ' , . ; : - ? !
 There are no particular reason for the relative small character set, a possible interpretation here could be given is that those are the most commonly encountered characters in English Poetry, those confined our users to this realative small characterset can result to a better resemblance to what, by common agreement is called "poetry".
