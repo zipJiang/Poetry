@@ -30,3 +30,4 @@ void nb_parser();
 void useless_parser();
 
 void ifstat_parser();
+void stmt_parser();

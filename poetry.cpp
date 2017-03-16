@@ -64,10 +64,10 @@ int lex() {
 		}
 	}
 	/* Determine the category of this word */
-	if(numbers.find(os.str()) != numbers.end()) {
+	if(numbers.find(nextLexeme) != numbers.end()) {
 		return nextToken = NUMBER;
 	}
-	if(builtin.find(os.str()) != builtin.end()) {
+	if(builtin.find(nextLexeme) != builtin.end()) {
 		return nextToken = RESERVED;
 	}
 	return nextToken = USELESS_WORD;
@@ -76,16 +76,9 @@ int lex() {
 int syntax() {
 	/* Note: this is only for trial */
 	lex();
-	if(nextToken & (USELESS_WORD | MARK))
-		useless_parser();
-
-	if(nextToken == EOF)
-		return 0;
-
-	eval_parser();
-	if(nextToken & (USELESS_WORD | MARK))
-		useless_parser();
-	/* End Trail */
+	while(is.good()) {
+		stmt_parser();
+	}
 	return 0;
 }
 
@@ -134,6 +127,7 @@ int main( int args, char **argv ) {
 	builtin.insert("divide");
 	builtin.insert("without");
 	builtin.insert("by");
+	builtin.insert("and");
 
 	/* Initialize input file */
 

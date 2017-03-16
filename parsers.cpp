@@ -8,18 +8,26 @@ void eval_parser() {
 	 * This space is left intentionally for
 	 * optional <useless> parse
 	 */
-	if(nextToken & (USELESS_WORD | MARK))
+	if(nextToken & (USELESS_WORD | MARK)) {
 		useless_parser();
+	}
 	
 	while(nextLexeme == "and") {
 		/*
 		* This space is left intentionally for
 		* optional <useless> parse
 		*/
-		if(nextToken & (USELESS_WORD | MARK))
-			useless_parser();
 		lex();
-		eval_parser();
+		if(nextToken & (USELESS_WORD | MARK)) {
+			useless_parser();
+		}
+		if(nextToken != NUMBER && nextLexeme != "without") {
+			std::cout << "failed to resolve, this part of the <eval> will be treated as <useless>, starting from last \"and\"" <<
+				std::endl;
+		}
+		else {
+			eval_parser();
+		}
 	}
 	std::cout << "finished <eval>" << std::endl;
 }
@@ -29,13 +37,16 @@ void mevl_parser() {
 	divs_parser();
 
 	/* <useless> */
-	if(nextToken & (USELESS_WORD | MARK))
-		useless_parser();
+	/*
+	 *if(nextToken & (USELESS_WORD | MARK))
+	 *    useless_parser();
+	 */
 
 	while(nextToken == NUMBER || nextLexeme == "without") {
 		/* <useless> */
-		if(nextToken & (USELESS_WORD | MARK))
+		if(nextToken & (USELESS_WORD | MARK)) {
 			useless_parser();
+		}
 		
 		mevl_parser();
 	}
@@ -45,21 +56,24 @@ void mevl_parser() {
 void divs_parser() {
 	std::cout << "parsing <divs>" << std::endl;
 	if(nextLexeme != "divide") {
-		if(nextToken & (USELESS_WORD | MARK))
+		if(nextToken & (USELESS_WORD | MARK)) {
 			useless_parser();
+		}
 		num_parser();
 		std::cout << "finished <divs>" << std::endl;
 		return ;
 	}
 
 	lex();
-	if(nextToken & (USELESS_WORD | MARK))
+	if(nextToken & (USELESS_WORD | MARK)) {
 		useless_parser();
+	}
 	eval_parser();
 	
 	/* <useless> */
-	if(nextToken & (USELESS_WORD | MARK))
+	if(nextToken & (USELESS_WORD | MARK)) {
 		useless_parser();
+	}
 
 	if(nextLexeme != "by") {
 		std::cout << "parsing failed, expected \" by \" lexeme." << std::endl;
@@ -69,13 +83,15 @@ void divs_parser() {
 	lex();
 
 	/* <useless> */
-	if(nextToken & (USELESS_WORD | MARK))
+	if(nextToken & (USELESS_WORD | MARK)) {
 		useless_parser();
+	}
 
 	eval_parser();
 
-	if(nextToken & (USELESS_WORD | MARK))
+	if(nextToken & (USELESS_WORD | MARK)) {
 		useless_parser();
+	}
 	
 	if(nextLexeme != "then") {
 		std::cout << "parsing failed, expected \" then \" lexeme." << std::endl;
@@ -94,8 +110,9 @@ void num_parser() {
 	}
 
 	/* <useless> */
-	if(nextToken & (USELESS_WORD | MARK))
+	if(nextToken & (USELESS_WORD | MARK)) {
 		useless_parser();
+	}
 
 	nb_parser();
 	std::cout << "finished <num>" << std::endl;
@@ -136,17 +153,98 @@ void useless_parser() {
 }
 
 void ifstat_parser() {
+	std::cout << "parsing <if_stat>" << std::endl;
 	if(nextLexeme != "if") {
 		std::cout << "parsing failed, expected a BUILTIN \"if\"" <<
 			std::endl;
+		std::cout << "finished <if_stat>" << std::endl;
 		return ;
 	}
 	lex();
 	
 	/* <useless> */
-	if(nextToken & (USELESS_WORD | MARK))
+	if(nextToken & (USELESS_WORD | MARK)) {
 		useless_parser();
+	}
 
 	eval_parser();
 
+	if(nextLexeme == "else" || nextLexeme == "or" ||
+	   nextLexeme == "rather") {
+		std::cout << "parsing failed, expected a statement in \"if\""
+			<< std::endl;
+		
+		std::cout << "finished <if_stat>" << std::endl;
+		return ;
+	}
+	while(nextLexeme != "else" && nextLexeme != "rather" &&
+			nextLexeme != "or" &&nextLexeme != "end" &&
+			nextLexeme != "cease") {
+		/* <useless> */
+		if(nextToken & (USELESS_WORD | MARK)) {
+			useless_parser();
+		}
+
+		stmt_parser();
+	}
+
+	if(nextLexeme == "else" || nextLexeme == "or" ||
+			nextLexeme == "rather") {
+		lex();
+	}
+	while(nextLexeme != "else" && nextLexeme != "rather" &&
+			nextLexeme != "or" &&nextLexeme != "end" &&
+			nextLexeme != "cease") {
+		/* <useless> */
+		if(nextToken & (USELESS_WORD | MARK))
+			useless_parser();
+
+		stmt_parser();
+	}
+
+	/* <useless> */
+	if(nextToken & (USELESS_WORD | MARK))
+		useless_parser();
+	
+	if(nextLexeme == "else" || nextLexeme == "rather" ||
+			nextLexeme == "or") {
+		std::cout << "<if_stat> combination failed." << std::endl;
+		std::cout << "finished <if_stat>" << std::endl;
+		return ;
+	}
+	else if(nextLexeme == "end" || nextLexeme == "cease") {
+		lex();
+	}
+
+	std::cout << "finished <if_stat>" << std::endl;
+}
+
+void stmt_parser() {
+	
+	if(nextLexeme == "if") {
+		ifstat_parser();
+	}
+	/* <useless> */
+	else if(nextToken & (USELESS_WORD | MARK)) {
+		useless_parser();
+	}
+
+	else if(nextToken == NUMBER || nextLexeme == "without") {
+		eval_parser();
+	}
+
+	else if(nextToken == RESERVED) {
+		std::cout << 
+			"unresolved reserved lexeme, treated as <useless>" <<
+			std::endl;
+		lex();
+	}
+
+	/* And other statement to be implemented. */
+
+	/*
+	 *else {
+	 *    std::cout << (int)nextLexeme[0] << std::endl;
+	 *}
+	 */
 }
