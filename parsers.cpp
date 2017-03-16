@@ -134,3 +134,19 @@ void useless_parser() {
 	/*end parsing useless*/
 	std::cout << "finished <useless>" << std::endl;
 }
+
+void ifstat_parser() {
+	if(nextLexeme != "if") {
+		std::cout << "parsing failed, expected a BUILTIN \"if\"" <<
+			std::endl;
+		return ;
+	}
+	lex();
+	
+	/* <useless> */
+	if(nextToken & (USELESS_WORD | MARK))
+		useless_parser();
+
+	eval_parser();
+
+}

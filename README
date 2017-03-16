@@ -56,7 +56,7 @@ The <if_stat> functions basically like those in the C family languages, with the
 		  | non-if-statements
 
 	<umad> -> if [<mark>] <eval> (<useless> | <mark>) {<stmt>}
-		  | if [<mark>] <eval> ; {<mchd>}
+		  | if [<mark>] <eval> (<useless> | <mark>) {<mchd>}
 		  [<useless>] (else | or | rather)
 		  [<useless>] {<umad>}
 		  (end | cease)[<mark>]
